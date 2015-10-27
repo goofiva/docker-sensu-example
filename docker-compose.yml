@@ -1,0 +1,22 @@
+
+sensuserver:
+  hostname: sensu.local
+  image: hiroakis/docker-sensu-server
+  name: sensu-server
+  ports:
+    - "3000:3000"
+    - "4567:4567"
+    - "5671:5671"
+    - "15672:15672"
+  volumes:
+    - ./sensu/check-docker.json:/etc/sensu/conf.d/check-docker.json
+
+sensuclient:
+  hostname: sensuclient.local
+  command: sensu password sensuclient
+  build: ./sensu-client
+  name: sensuclient
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+  links:
+    - sensuserver:sensuserver.local
