@@ -7,7 +7,7 @@ usage(){
 
 [[ $# -ne 3 ]] && usage
 
-SENSU_SERVER=$(grep sensuserver.local /etc/hosts | awk '{ print $1}')
+SENSU_SERVER=$(grep sensuserver /etc/hosts | awk '{ print $1}')
 SENSU_USER=$1
 SENSU_PASSWORD=$2
 CLIENT_NAME=$3
